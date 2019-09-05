@@ -6,3 +6,17 @@ textarea {
 mat-spinner {
   margin: auto;
 }
+
+input[type="file"] {
+  visibility: hidden
+}
+
+.image-preview {
+  margin-top: 20px;
+  height: 20rem;
+  width: 4rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}
