@@ -1,42 +1,43 @@
-const path = require("path");
-const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+const path = require ('path');
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cors = require ('cors');
 
-const postsRoutes = require("./routes/posts");
-const userRoutes = require("./routes/user");
-
+const postsroutes = require('./routes/posts');
+const userroutes = require('./routes/user');
 const app = express();
 
-mongoose
-  .connect(
-    "mongodb+srv://max:QuBqs0T45GDKPlIG@cluster0-ntrwp.mongodb.net/node-angular"
-  )
-  .then(() => {
-    console.log("Connected to database!");
+mongoose.connect("mongodb+srv://mongo-adm:qDYNoySK2GiZ44tZ@cluster0-lb7gt.mongodb.net/node-angular?retryWrites=true", { useNewUrlParser: true })
+  .then(()=> {
+    console.log('Connected to Database!');
   })
   .catch(() => {
-    console.log("Connection failed!");
+    console.log('Connection failed!')
   });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use("/images", express.static(path.join("backend/images")));
+app.use(cors());
 
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+app.use((_req, res, next) => {
   res.setHeader(
+    "Access-Control-Allow-Origin", "*");
+
+ res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
-  );
-  next();
-});
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization,"
+    );
 
-app.use("/api/posts", postsRoutes);
-app.use("/api/user", userRoutes);
+  res.setHeader(
+   "Access-Control-Allow-Methods" ,
+   "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+   );
+  next();
+})
+
+app.use('/api/posts', postsroutes);
+app.use('/api/user', userroutes);
 
 module.exports = app;
