@@ -8,7 +8,8 @@ const postsroutes = require('./routes/posts');
 const userroutes = require('./routes/user');
 const app = express();
 
-mongoose.connect("mongodb+srv://mongo-adm:qDYNoySK2GiZ44tZ@cluster0-lb7gt.mongodb.net/node-angular?retryWrites=true", { useNewUrlParser: true })
+mongoose.set('useCreateIndex', true)
+mongoose.connect("mongodb+srv://mongo-adm:qDYNoySK2GiZ44tZ@cluster0-lb7gt.mongodb.net/node-angular?retryWrites=true", { useNewUrlParser: true },)
   .then(()=> {
     console.log('Connected to Database!');
   })
