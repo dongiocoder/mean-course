@@ -8,13 +8,12 @@ mat-spinner {
 }
 
 input[type="file"] {
-  visibility: hidden
+  visibility: hidden;
 }
 
 .image-preview {
-  margin-top: 20px;
-  height: 20rem;
-  width: 4rem 0;
+  height: 5rem;
+  margin: 1rem 0;
 }
 
 .image-preview img {
